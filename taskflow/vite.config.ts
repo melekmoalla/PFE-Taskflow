@@ -7,6 +7,7 @@ import { hostname } from "os"
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  base: 'PFE-Taskflow/tree/main/taskflow',
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

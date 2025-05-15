@@ -1,5 +1,6 @@
 {
   "name": "taskflow",
+  "homepage": "https://melekmoalla.github.io/PFE-Taskflow/tree/main/taskflow",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,7 +8,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.25.6",
