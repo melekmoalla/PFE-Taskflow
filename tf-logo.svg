@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200">
+  <!-- Background rounded rectangle -->
+  <rect x="50" y="40" width="200" height="120" rx="25" ry="25" fill="#2684FF" />
+  
+  <!-- First card -->
+  <rect x="70" y="60" width="50" height="80" rx="8" ry="8" fill="#FFFFFF" />
+  <rect x="80" y="75" width="30" height="5" rx="2" ry="2" fill="#0052CC" />
+  <rect x="80" y="90" width="20" height="5" rx="2" ry="2" fill="#0052CC" opacity="0.7" />
+  <rect x="80" y="105" width="30" height="5" rx="2" ry="2" fill="#0052CC" opacity="0.5" />
+  <circle cx="85" cy="125" r="5" fill="#36B37E" />
+  
+  <!-- Middle card, slightly raised -->
+  <rect x="125" y="55" width="50" height="80" rx="8" ry="8" fill="#FFFFFF" stroke="#36B37E" stroke-width="2" />
+  <rect x="135" y="70" width="30" height="5" rx="2" ry="2" fill="#0052CC" />
+  <rect x="135" y="85" width="20" height="5" rx="2" ry="2" fill="#0052CC" opacity="0.7" />
+  <rect x="135" y="100" width="30" height="5" rx="2" ry="2" fill="#0052CC" opacity="0.5" />
+  <circle cx="140" cy="120" r="5" fill="#FF5630" />
+  
+  <!-- Third card -->
+  <rect x="180" y="60" width="50" height="80" rx="8" ry="8" fill="#FFFFFF" />
+  <rect x="190" y="75" width="30" height="5" rx="2" ry="2" fill="#0052CC" />
+  <rect x="190" y="90" width="20" height="5" rx="2" ry="2" fill="#0052CC" opacity="0.7" />
+  <rect x="190" y="105" width="30" height="5" rx="2" ry="2" fill="#0052CC" opacity="0.5" />
+  <circle cx="195" cy="125" r="5" fill="#6554C0" />
+  
+  <!-- Abbreviation text -->
+  <text x="150" y="165" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#FFFFFF">TF</text>
+</svg>
