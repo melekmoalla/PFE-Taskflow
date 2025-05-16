@@ -1,4 +1,4 @@
-import {  KeyboardEventHandler, forwardRef, useRef } from "react";
+import { KeyboardEventHandler, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Plus, X } from "lucide-react";
 import FormSubmit from "@/components/form/form-submit";
@@ -18,8 +18,13 @@ interface CardFormProps {
 }
 
 
-const CardForm = forwardRef<HTMLTextAreaElement, CardFormProps>(({ listId, isEditing, disableEditing, enableEditing, refetchLists }) => {
-
+const CardForm: React.FC<CardFormProps> = ({
+  listId,
+  isEditing,
+  disableEditing,
+  enableEditing,
+  refetchLists
+}) => {
   const formRef = useRef<HTMLFormElement>(null);
 
   const createCard = useCreateCard();
@@ -67,7 +72,7 @@ const CardForm = forwardRef<HTMLTextAreaElement, CardFormProps>(({ listId, isEdi
         <FormTextarea
           id="title"
           name="title"
-     
+
           onKeyDown={onTextAreaKeyDown}
           placeholder="Enter title for this card..."
           errors={fieldErrors}
@@ -102,6 +107,6 @@ const CardForm = forwardRef<HTMLTextAreaElement, CardFormProps>(({ listId, isEdi
       </Button>
     </div>
   );
-});
+};
 
 export default CardForm;

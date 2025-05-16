@@ -69,7 +69,7 @@ const ListItem = ({ index, data, refetchLists }: IListItemProps) => {
                         </Droppable>
                         <CardForm
                             listId={data.id}
-                            //ref={textareaRef}
+                    
                             isEditing={isEditing}
                             enableEditing={enableEditing}
                             disableEditing={disableEditing}
@@ -83,3 +83,4 @@ const ListItem = ({ index, data, refetchLists }: IListItemProps) => {
 };
 
 export default ListItem;
+//ref={textareaRef}

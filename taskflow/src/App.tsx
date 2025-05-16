@@ -1,4 +1,4 @@
-import { BrowserRouter as  Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import MarketingPage from "./pages/marketing/marketing-page";
 import MarketingLayout from "./pages/marketing/layout-marketing";
 import SignIpPage from "./pages/platform/clerk/sign-in/sign-in-page";
@@ -35,7 +35,6 @@ function App() {
       {role === 'org:admin' && (<Route path="/organization/:organizationId/billing" element={<ProtectedRoute><DashboardLayout><Organizationlayout> <BillingPage /></Organizationlayout> </DashboardLayout></ProtectedRoute>} />
       )}
       <Route path="/board/:boardId" element={<ProtectedRoute><DashboardLayout><BoardIdLayout><BoardIdPage /></BoardIdLayout></DashboardLayout></ProtectedRoute>} />
-
 
       {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
       <Route path="*" element={<ErrorPage />} />
