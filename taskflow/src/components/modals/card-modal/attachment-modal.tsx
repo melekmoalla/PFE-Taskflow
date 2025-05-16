@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 interface Attachment {
-    id: string;
+    id: number;
     link?: string;
     file?: string;
     description?: string;
@@ -43,8 +43,8 @@ const CardModalAttachment = ({ data, id_card, title }: CardModalAttachmentProps)
         },
     });
 
-    const handleDelete = (id: string, description?: string) => {
-        executeDelete({ id, title: description, id_card });
+    const handleDelete = (id: number, description?: string) => {
+        executeDelete({ id, title: description ?? "", id_card });
     };
 
     const sortedData = [...data].reverse();
@@ -104,7 +104,7 @@ const CardModalAttachment = ({ data, id_card, title }: CardModalAttachmentProps)
                                 </a>
                             ) : (
                                 <button
-                                    onClick={() => downloadFile(attachment.file, attachment.description || "downloaded-file")}
+                                    onClick={() => downloadFile(attachment.file ?? "", attachment.description || "downloaded-file")}
                                     className="text-blue-600 underline cursor-pointer" 
                                 >
                                     {attachment.description || "Download file"}

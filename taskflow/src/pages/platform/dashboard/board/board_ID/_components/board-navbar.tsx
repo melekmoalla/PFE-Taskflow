@@ -16,7 +16,13 @@ import { useApiRequest } from "@/action/auth";
 
 interface IBoardNavbarProps {
     board: Board;
+
 }
+type Member = {
+    userImage: string;
+
+};
+
 const BoardNavbar = ({ board }: IBoardNavbarProps) => {
     //console.log(board);
     const { apiRequest } = useApiRequest();
@@ -56,7 +62,7 @@ const BoardNavbar = ({ board }: IBoardNavbarProps) => {
             <BoardTitleForm data={board} />
             <div className="ml-auto">
                 <div className='flex'>
-                    {assigns.map((member, index) => (
+                    {assigns.map((member: Member, index) => (
                         <Avatar key={index} className="h-8 w-8 ">
                             <AvatarImage src={member.userImage} />
                         </Avatar>

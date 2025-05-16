@@ -7,7 +7,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 interface CardModalCommentProps {
     children: React.ReactNode;
-    id_card: string;
+    id_card: string | undefined ;
 }
 
 const CardModalComment = ({ children, id_card }: CardModalCommentProps) => {

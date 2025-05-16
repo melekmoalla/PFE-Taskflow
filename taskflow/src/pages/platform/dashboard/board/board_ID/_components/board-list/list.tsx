@@ -7,14 +7,18 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal, X } from "lucide-react";
-import FormSubmit from "@/components/form/form-submit";
 import { Separator } from "@/components/ui/separator";
+import { toast } from 'sonner';
+import { useRef } from "react";
+
+//////////////////////////////////////////////
+
+import FormSubmit from "@/components/form/form-submit";
 import { useAction } from "@/hooks/use-action";
 import { useDeleteList } from "@/action/delete-list/index";
 import { useCopyList } from "@/action/copy-list/index";
-import { toast } from 'sonner';
-import {  useRef } from "react";
 
+//////////////////////////////////////////////
 
 interface ListOptionsProps {
     onAddCard: () => void;
@@ -24,7 +28,8 @@ interface ListOptionsProps {
 
 const ListOptions = ({ onAddCard, data, refetchLists }: ListOptionsProps) => {
 
-    const closePopoverRef = useRef(null);
+    const closePopoverRef = useRef<HTMLButtonElement>(null);
+
     const deleteList = useDeleteList();
     const { execute } = useAction(deleteList, {
         onSuccess: () => {

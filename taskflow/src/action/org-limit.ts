@@ -1,4 +1,5 @@
-export const hasAvailableCount_or_getAvailableCount = async (orgId, apiRequest) => {
+export const hasAvailableCount_or_getAvailableCount = async (  orgId: string,
+  apiRequest: any) => {
     try {
         if (!orgId) {
             throw new Error("Unauthorized.");
@@ -13,7 +14,8 @@ export const hasAvailableCount_or_getAvailableCount = async (orgId, apiRequest) 
     }
 };
 
-export const increaseAvailableCount = async (orgId, apiRequest) => {
+export const increaseAvailableCount = async (  orgId: string,
+  apiRequest: any) => {
     try {
         if (!orgId) {
             throw new Error("Unauthorized.");
@@ -29,7 +31,8 @@ export const increaseAvailableCount = async (orgId, apiRequest) => {
     return null;
 };
 
-export const decreaseAvailableCount = async (orgId, apiRequest) => {
+export const decreaseAvailableCount = async (  orgId: string,
+  apiRequest: any) => {
     try {
         if (!orgId) {
             throw new Error("Unauthorized.");

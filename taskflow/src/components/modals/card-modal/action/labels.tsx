@@ -31,7 +31,7 @@ export const FormPopoverLabel = ({
 }: {
     children: React.ReactNode;
     boardId: string;
-    cardId: string;
+    cardId: number;
     select: any;
 }) => {
     //console.log(select)
@@ -74,7 +74,7 @@ export const FormPopoverLabel = ({
             //console.log(response);
             //console.log(response)
             setLabels(
-                response.map(label => ({
+                response.map((label: any) => ({
                     ...label,
                     isSelected: select.includes(label.id)
                 }))
@@ -186,7 +186,7 @@ export const FormPopoverLabel = ({
                 ) : (
                     <div className="space-y-2">
                         <div className="max-h-48 overflow-y-auto px-4">
-                            {labels.map((label) => (
+                            {labels.map((label: any) => (
                                 <div key={label.id} >
                                     <Color label={label} disableEditing={disableEditing} setRefreshLabels={setRefreshLabels} cardId={cardId} labels={labels}
                                         setLabels={setLabels} />

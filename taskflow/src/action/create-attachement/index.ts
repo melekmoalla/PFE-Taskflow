@@ -25,7 +25,7 @@ export const useCreateAttachement = () => {
 
         if (file) {
           const formData = new FormData();
-          formData.append('description', description);
+          formData.append('description', description ?? "");
           formData.append('file', file);
         
           createAttachmentResponse = await apiRequest(
@@ -43,7 +43,7 @@ export const useCreateAttachement = () => {
 
         await createAuditLog({
           action: ACTION.CREATE,
-          entityId: id_card,
+          entityId: id_card.toString(),
           entityTitle: description,
           entityType: ENTITY_TYPE.ATTACHMENT,
         });

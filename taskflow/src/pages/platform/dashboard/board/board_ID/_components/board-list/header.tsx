@@ -1,4 +1,4 @@
-import React, { ElementRef, useRef, useState } from "react";
+import  { useRef, useState } from "react";
 import { toast } from "sonner";
 import { useEventListener } from "usehooks-ts";
 import FormInput from "@/components/form/form-input";
@@ -17,8 +17,8 @@ const ListHeader = ({ data, onAddCard, refetchLists }: IListHeaderProps) => {
 
     const [title, setTitle] = useState(data.title);
     const [isEditing, setIsEditing] = useState(false);
-    const formRef = useRef(null);
-    const inputRef = useRef(null);
+    const formRef =  useRef<HTMLFormElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const enableEditing = () => {
         setIsEditing(true);
@@ -60,7 +60,8 @@ const ListHeader = ({ data, onAddCard, refetchLists }: IListHeaderProps) => {
             return disableEditing();
         }
         console.log(data);
-        const promise = execute({ title, listId: data.id  });
+        
+        execute({ title, listId: data.id  });
 
     };
 

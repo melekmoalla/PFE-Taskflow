@@ -1,6 +1,6 @@
 
 import { createSafeAction } from "@/lib/create-safe-action";
-import { InputType, ReturnType } from "./types";
+import { InputType } from "./types";
 import { DeleteBoardSchema } from "./schema";
 import { useApiRequest } from "@/action/auth";
 import { useMemo } from "react";
@@ -17,7 +17,7 @@ export const useDeleteBoard = () => {
   const { userId, orgId } = useAuth();
   // define handler inside a hook
   const handler = useMemo(() => {
-    return async (data: InputType): Promise<ReturnType> => {
+    return async (data: InputType): Promise<any> => {
       if (!userId || !orgId) {
         return {
           error: "Unauthorized.",
@@ -28,12 +28,12 @@ export const useDeleteBoard = () => {
 
       try {
        
-        const board = await apiRequest(`/api/board/${id}/?orgId=${orgId}`, null, "DELETE");
+        await apiRequest(`/api/board/${id}/?orgId=${orgId}`, null, "DELETE");
 
         await decreaseAvailableCount(orgId, apiRequest);
         await createAuditLog({
           action: ACTION.DELETE,
-          entityId: id,
+          entityId: id.toString(),
           entityTitle: title,
           entityType: ENTITY_TYPE.BOARD,
         });

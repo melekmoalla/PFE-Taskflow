@@ -45,8 +45,8 @@ export const useUpdateColor = () => {
         //console.log(title);
         await createAuditLog({
           action: ACTION.UPDATE,
-          entityId: id_card,
-          entityTitle: freshDescriptionAuditRef.current,
+          entityId: id_card.toString(),
+          entityTitle: freshDescriptionAuditRef.current ?? undefined,
           entityType: ENTITY_TYPE.COLOR,
         });
         setDescription_audit(null);

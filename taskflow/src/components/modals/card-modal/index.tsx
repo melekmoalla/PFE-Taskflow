@@ -28,7 +28,7 @@ const CardModal = () => {
 
 
     const { apiRequest } = useApiRequest();
-    const { userId, orgId } = useAuth();
+    const { orgId } = useAuth();
 
 
     const { data: cardData } = useQuery({
@@ -44,13 +44,13 @@ const CardModal = () => {
 
     useEffect(() => {
         if (id && orgId) {
-            refetchLists();
+            refetchLists?.();
         }
     }, [id, orgId, cardData]);
 
 
 
-    const { data: auditLogsData, error } = useQuery({
+    const { data: auditLogsData } = useQuery({
         queryKey: ["card-logs", id],
         queryFn: () => {
             if (!id || !orgId) throw new Error("Missing ID or Org");
@@ -73,7 +73,7 @@ const CardModal = () => {
 
                 {cardData && (
                     <div className="flex flex-wrap gap-2 mb-4">
-                        {cardData.colors.map((color) => (
+                        {cardData.colors.map((color: any) => (
 
                             <Button key={color.title} style={{ backgroundColor: color.color }}>{color.title}</Button>
 
@@ -124,12 +124,12 @@ const CardModal = () => {
                                 <CardModalDescription.Skeleton />
                             )}
                             {AttachmentData && cardData ? (
-                                <CardModalAttachment data={AttachmentData} id_card={id} title={cardData.title}/>
+                                <CardModalAttachment data={AttachmentData} id_card={id} title={cardData.title} />
                             ) : (
                                 <CardModalAttachment.Skeleton />
                             )}
                             {auditLogsData ? (
-                                <CardModalActivity items={auditLogsData} id_card={id}/>
+                                <CardModalActivity items={auditLogsData} id_card={id} />
                             ) : (
                                 <CardModalActivity.Skeleton />
                             )}

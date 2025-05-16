@@ -20,9 +20,9 @@ const CardItem = ({ data, index, refetchLists }: IBoardListCardItemProps) => {
   const CardModal = useCardModal();
   const { boardId } = useParams();
 
-  const [activeLabelId, setActiveLabelId] = useState(null);
+  const [activeLabelId, setActiveLabelId] = useState<boolean>(false);
 
-  const toggleLabel = (id: number) => {
+  const toggleLabel = () => {
     setActiveLabelId(!activeLabelId);
   };
 
@@ -36,17 +36,17 @@ const CardItem = ({ data, index, refetchLists }: IBoardListCardItemProps) => {
           ref={provided.innerRef}
           role={"button"}
           onClick={() => {
-            CardModal.onOpen(data.id, boardId, refetchLists);
+            CardModal.onOpen(data.id, boardId ?? "", refetchLists);
           }}
           className="truncate border-2 border-transparent hover:border-black py-2 px-3 bg-white text-sm rounded-md shadow-sm"
         >
           <div className="flex flex-wrap gap-2 mb-4" onClick={(e) => e.stopPropagation()}>
-            {data.colors.map((color) => (
+            {data.colors.map((color:any) => (
               <div
                 key={color.id}
                 className="px-1 py-1 rounded text-white text-sm cursor-pointer"
                 style={{ backgroundColor: color.color }}
-                onClick={() => toggleLabel(color.id)}
+                onClick={() => toggleLabel()}
               >
                 <div
                   className={`
@@ -95,7 +95,7 @@ const CardItem = ({ data, index, refetchLists }: IBoardListCardItemProps) => {
               {/* Avatars on the right */}
               <div className="flex gap-1">
                 {data.members &&
-                  data.members.map((member) => (
+                  data.members.map((member: any) => (
                     <Avatar key={member.id} className="h-8 w-8">
                       <AvatarImage src={member.userImage} />
                     </Avatar>

@@ -13,7 +13,7 @@ import FormInput from "./form-input";
 import FormSubmit from "./form-submit";
 import { toast } from 'sonner';
 import { FormPicker } from './form-picker';
-import React, { ElementRef, use, useCallback, useRef } from "react";
+import React, {  useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import useProModal from "@/hooks/use-pro-modal";
 import { useOrganization } from '@clerk/clerk-react';
@@ -31,10 +31,11 @@ const FormPopover = ({
     align,
     sideOffset = 0,
 }: IFormPopoverProps) => {
+    
     const ProModal = useProModal();
     const navigate = useNavigate();
     const createBoard = useCreateBoard();
-    const closeRef = useRef(null);
+    const closeRef = useRef<HTMLButtonElement>(null);
     const { membership } = useOrganization();
     const role = membership?.role;
 

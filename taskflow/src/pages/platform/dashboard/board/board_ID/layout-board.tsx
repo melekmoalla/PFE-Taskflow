@@ -10,8 +10,9 @@ const BoardIdLayout = ({ children }: { children: React.ReactNode; }) => {
     const navigate = useNavigate();
     const { orgId } = useAuth();
     const { boardId } = useParams();
-    const [board, setBoard] = useState();
-    const { setBoard_aud } = useBoard();
+    const [board, setBoard] = useState<any | null>(null);
+    const { setBoard_aud } = useBoard() as { setBoard_aud: (board: any) => void };
+
 
 
     useEffect(() => {

@@ -25,11 +25,11 @@ export const useDeleteAttachment = () => {
       const { id, title , id_card} = data;
 
       try {
-        const deleteAttachment = await apiRequest(`/api/board/card/Attachment/${id}/`, null, "DELETE");
+        await apiRequest(`/api/board/card/Attachment/${id}/`, null, "DELETE");
 
         await createAuditLog({
           action: ACTION.DELETE,
-          entityId: id_card,
+          entityId: id_card.toString(),
           entityTitle: title,
           entityType: ENTITY_TYPE.ATTACHMENT,
           action_description: null,

@@ -25,11 +25,11 @@ export const usedeleteCard = () => {
       const { id, title } = data;
 
       try {
-        const deleteCard = await apiRequest(`/api/board/card/${id}/`, null, "DELETE");
+        await apiRequest(`/api/board/card/${id}/`, null, "DELETE");
 
         await createAuditLog({
           action: ACTION.DELETE,
-          entityId: id,
+          entityId: id.toString(),
           entityTitle: title,
           entityType: ENTITY_TYPE.CARD,
 

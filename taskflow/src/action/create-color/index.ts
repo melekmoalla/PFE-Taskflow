@@ -33,7 +33,7 @@ export const useCreateColor = () => {
 
         await createAuditLog({
           action: ACTION.CREATE,
-          entityId: id_card,
+          entityId: id_card ,
           entityTitle: title,
           entityType: ENTITY_TYPE.COLOR,
         });

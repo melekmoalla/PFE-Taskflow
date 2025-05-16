@@ -22,7 +22,7 @@ export const useCopyList = () => {
         };
       }
       //console.log(data);
-      const { id, title } = data;
+      const { id } = data;
 
       try {
         const copiedList = await apiRequest(`/api/list/${id}/`, null, "POST");

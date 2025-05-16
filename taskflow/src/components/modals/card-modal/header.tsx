@@ -15,7 +15,7 @@ import FormInput from "@/components/form/form-input";
 
 const CardModalHeader = ({ data, refetchLists }: any) => {
 
-    const inputRef = useRef(null);
+    const inputRef = useRef<HTMLInputElement>(null);
     const [title, setTitle] = useState(data.title);
     const queryClient = useQueryClient();
 

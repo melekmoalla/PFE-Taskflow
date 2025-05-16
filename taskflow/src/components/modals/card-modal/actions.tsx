@@ -50,8 +50,9 @@ const CardModalActions = ({ data, refetchLists, boardId }: any) => {
     const onDelete = () => {
         executeCardDelete({ id: data.id, title: data.title });
     };
-    const SelectColors = data.colors.map(label => label.id);
-    const SelectMembers = data.members.map(assign => assign.id);
+const SelectColors = (data.colors as { id: string }[]).map((label) => label.id);
+const SelectMembers = (data.members as { id: string }[]).map((assign) => assign.id);
+
 
     return (
         <div className="space-y-2 mt-2">

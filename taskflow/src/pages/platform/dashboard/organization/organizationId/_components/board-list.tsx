@@ -44,7 +44,7 @@ export const BoardList = () => {
 
     useEffect(() => {
         const getCountAndSubscription = async () => {
-            const result = await hasAvailableCount_or_getAvailableCount(orgId, apiRequest);
+            const result = await hasAvailableCount_or_getAvailableCount(orgId!, apiRequest);
             setAvailableCount(result);
 
             const isPro = await checkSubscription();

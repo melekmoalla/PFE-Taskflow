@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as  Routes, Route } from "react-router-dom";
 import MarketingPage from "./pages/marketing/marketing-page";
 import MarketingLayout from "./pages/marketing/layout-marketing";
 import SignIpPage from "./pages/platform/clerk/sign-in/sign-in-page";

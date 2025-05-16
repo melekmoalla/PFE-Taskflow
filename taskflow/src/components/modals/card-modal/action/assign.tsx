@@ -23,21 +23,29 @@ import { useBoard } from "@/hooks/use-board";
 
 //////////////////////////////////////////////
 
+interface Member {
+  id: string;
+  email: string;
+  userImage: string;
+  isSelected: boolean | null;
+}
+
+
 interface AssignProps {
     children: React.ReactNode;
-    select: [];
-    cardId: string;
+    select: string[];
+    cardId: number;
 }
 
 const Assign = ({ children, select, cardId }: AssignProps) => {
 
-    const actionRef = useRef(null);
+    const actionRef = useRef<boolean | null>(null);
     const queryClient = useQueryClient();
 
     const { apiRequest } = useApiRequest();
     const navigate = useNavigate();
     const { orgId } = useAuth();
-    const [assigns, setAssign] = useState([]);
+    const [assigns, setAssign] = useState<Member[]>([]);
     const { setDescription_audit } = useBoard();
 
     const fetchmembers = async () => {
@@ -54,11 +62,10 @@ const Assign = ({ children, select, cardId }: AssignProps) => {
                 return;
             }
 
-            setAssign(response.members.map(assign => ({
+            setAssign(response.members.map((assign: any) => ({
                 ...assign,
-                isSelected: select.includes(assign.id)
-
-            })));;
+                isSelected: select.includes(assign.id),
+            })));
 
 
         } catch (error: any) {
@@ -88,7 +95,7 @@ const Assign = ({ children, select, cardId }: AssignProps) => {
         },
     });
 
-    const handleAssignToggle = (assignId: string, isSelected: boolean) => {
+    const handleAssignToggle = (assignId: string, isSelected: boolean | null)  => {
 
         actionRef.current = isSelected;
         const updatedAssign = assigns.map(assign =>
@@ -100,12 +107,12 @@ const Assign = ({ children, select, cardId }: AssignProps) => {
         const selectedLabels = updatedAssign.filter(assign => assign.isSelected).map(assign => assign.id);
 
         if (isSelected)
-            setDescription_audit('Added assignment'); 
+            setDescription_audit('Added assignment');
         else
             setDescription_audit('Removed assignment');
 
-        executeToggleLabel({ id: cardId, members: selectedLabels });
-        
+        executeToggleLabel({ id: cardId, members: selectedLabels.map(Number) });
+
     };
 
 

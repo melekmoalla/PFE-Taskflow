@@ -21,7 +21,7 @@ interface IListItemProps {
 
 const ListItem = ({ index, data, refetchLists }: IListItemProps) => {
 
-    const textareaRef = useRef(null);
+    const textareaRef = useRef<HTMLInputElement>(null);
     const [isEditing, setIsEditing] = useState(false);
 
     const enableEditing = () => {
@@ -55,7 +55,7 @@ const ListItem = ({ index, data, refetchLists }: IListItemProps) => {
                                         data.cards.length > 0 && "mt-2"
                                     )}
                                 >
-                                    {data.cards.map((card, index) => (
+                                    {data.cards.map((card: { id: string; title: string }, index: number) => (
                                         <CardItem
                                             index={index}
                                             key={card.id}
@@ -69,7 +69,7 @@ const ListItem = ({ index, data, refetchLists }: IListItemProps) => {
                         </Droppable>
                         <CardForm
                             listId={data.id}
-                            ref={textareaRef}
+                            //ref={textareaRef}
                             isEditing={isEditing}
                             enableEditing={enableEditing}
                             disableEditing={disableEditing}

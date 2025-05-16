@@ -22,7 +22,7 @@ export const useCopyCard = () => {
         };
       }
       //console.log(data);
-      const { id, title  } = data;
+      const { id  } = data;
 
       try {
         const copieCard = await apiRequest(`/api/board/card/${id}/`, null, "POST");

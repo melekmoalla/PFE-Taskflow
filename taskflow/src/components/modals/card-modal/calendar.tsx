@@ -25,9 +25,17 @@ import FormErrors from "../../form/form-errors";
 import FormInput from "../../form/form-input";
 import { useBoard } from "@/hooks/use-board";
 
+interface CalendarData {
+    id: number | string;
+    reminder_time?: string;
+    time_date?: string;
+    due_date?: string;
+    start_date?: string;
+}
+
 interface CalendarFormProps {
     children: React.ReactNode;
-    data: object;
+    data: CalendarData;
 }
 
 export function CalendarForm({ children, data }: CalendarFormProps) {
@@ -40,29 +48,35 @@ export function CalendarForm({ children, data }: CalendarFormProps) {
         }),
     })
 
-    const closeRef = useRef(null);
-    const actionRef = useRef(null);
+    const closeRef = useRef<HTMLButtonElement | null>(null);
+    const actionRef = useRef<"delete" | "create" | "update" | null>(null);
     const queryClient = useQueryClient();
 
     const [errors, setErrors] = useState({});
     const [reminder, setReminder] = useState(data.reminder_time);
     const [isRange, setIsRange] = useState(false);
-    const [selectedDate, setSelectedDate] = useState(undefined);
-    const [dateRange, setDateRange] = useState({ from: undefined, to: undefined });
+    const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
+    const [dateRange, setDateRange] = useState<any>({
+        from: new Date(),
+        to: undefined,
+    });
+
+
     const [selectedTime, setSelectedTime] = useState(data.time_date ? data.time_date.slice(0, 5) : "00:00");
-    const { setDescription_audit } = useBoard();
+    const { setDescription_audit } = useBoard() as { setDescription_audit: (desc: string) => void };
+
 
     const resetForm = () => {
         setErrors({});
         setReminder(data.reminder_time);
         setIsRange(false);
         setSelectedDate(data.due_date ? new Date(data.due_date) : undefined);
-        setDateRange({});
+        setDateRange({ from: undefined, to: undefined });
         setSelectedTime(data.time_date ? data.time_date.slice(0, 5) : "00:00");
     };
 
 
-    const handleTimeChange = (e) => {
+    const handleTimeChange = (e: any) => {
         setSelectedTime(e.target.value);
 
     };
@@ -70,7 +84,7 @@ export function CalendarForm({ children, data }: CalendarFormProps) {
     useEffect(() => {
         if (data.due_date) {
             const dueDate = new Date(data.due_date);
-            const startDate = new Date(data.start_date);
+            const startDate = new Date(data.start_date ?? '');
 
             const dueTime = dueDate.getTime();
             const startTime = startDate.getTime();
@@ -88,7 +102,7 @@ export function CalendarForm({ children, data }: CalendarFormProps) {
 
     // //////////////////////////
     const UpdateCard = useUpdateCard();
-    const { execute: executeUpdateCard, fieldErrors } = useAction(UpdateCard, {
+    const { execute: executeUpdateCard } = useAction(UpdateCard, {
         onSuccess: (data) => {
 
             let message = "";
@@ -105,7 +119,7 @@ export function CalendarForm({ children, data }: CalendarFormProps) {
                     message = `Saved changes to the card "${data.title}".`;
             }
 
-            closeRef.current.click();
+            closeRef.current?.click();
             toast.success(message);
 
             queryClient.invalidateQueries({
@@ -172,6 +186,13 @@ export function CalendarForm({ children, data }: CalendarFormProps) {
 
     };
 
+    const handleSelect = (value: any) => {
+        if (isRange) {
+            setDateRange(value as { from?: Date; to?: Date });
+        } else {
+            setSelectedDate(value as Date);
+        }
+    };
 
 
     return (
@@ -206,12 +227,22 @@ export function CalendarForm({ children, data }: CalendarFormProps) {
                 {/* Calendar */}
                 <div>
 
-                    <Calendar
-                        mode={isRange ? "range" : "single"}
-                        selected={isRange ? dateRange : selectedDate}
-                        onSelect={isRange ? setDateRange : setSelectedDate}
-                        initialFocus
-                    />
+                    {isRange && dateRange.from ? (
+                        <Calendar
+                            mode="range"
+                            selected={dateRange}
+                            onSelect={handleSelect}
+                            initialFocus
+                        />
+                    ) : (
+                        <Calendar
+                            mode="single"
+                            selected={selectedDate}
+                            onSelect={handleSelect}
+                            initialFocus
+                        />
+                    )}
+
                     <FormErrors errors={errors} id="data" />
                 </div>
 
@@ -242,6 +273,7 @@ export function CalendarForm({ children, data }: CalendarFormProps) {
                                     : "No due date selected"},
                         </span>
                         <FormInput
+                            id='time'
                             className="w-30 relative bottom-1.5"
                             type="time"
                             defaultValue={selectedTime}

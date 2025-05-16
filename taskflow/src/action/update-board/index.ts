@@ -32,7 +32,7 @@ export const useUpdateBoard = () => {
 
         await createAuditLog({
           action: ACTION.UPDATE,
-          entityId: id,
+          entityId: id.toString(),
           entityTitle: title,
           entityType: ENTITY_TYPE.BOARD,
         });

@@ -1,6 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { AlignLeft } from "lucide-react";
-import { useParams } from "react-router-dom";
 import { useRef, useState, } from "react";
 import { useEventListener, useOnClickOutside } from "usehooks-ts";
 import { Button } from "@/components/ui/button";
@@ -18,8 +17,8 @@ const CardModalDescription = ({ data }: any) => {
 
     const queryClient = useQueryClient();
 
-    const textareaRef = useRef(null);
-    const formRef = useRef(null);
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
+    const formRef = useRef<HTMLFormElement>(null);
 
     const [isEditing, setIsEditing] = useState(false);
     const [description, setDescription] = useState(data.description ?? "");
@@ -40,7 +39,8 @@ const CardModalDescription = ({ data }: any) => {
     };
 
     useEventListener("keydown", onKeyDown);
-    useOnClickOutside(formRef, disableEditing);
+    useOnClickOutside(formRef as React.RefObject<HTMLElement>, disableEditing);
+
 
     const UpdateCard = useUpdateCard();
     const { execute } = useAction(UpdateCard, {

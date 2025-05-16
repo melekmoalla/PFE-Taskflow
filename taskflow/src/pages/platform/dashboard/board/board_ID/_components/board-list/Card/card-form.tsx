@@ -18,10 +18,9 @@ interface CardFormProps {
 }
 
 
-const CardForm = forwardRef<HTMLTextAreaElement, CardFormProps>(({ listId, isEditing, disableEditing, enableEditing, refetchLists }, ref) => {
+const CardForm = forwardRef<HTMLTextAreaElement, CardFormProps>(({ listId, isEditing, disableEditing, enableEditing, refetchLists }) => {
 
-  const formRef = useRef(null);
-
+  const formRef = useRef<HTMLFormElement>(null);
 
   const createCard = useCreateCard();
   const { execute, fieldErrors } = useAction(createCard, {
@@ -50,7 +49,7 @@ const CardForm = forwardRef<HTMLTextAreaElement, CardFormProps>(({ listId, isEdi
     }
   };
 
-  useOnClickOutside(formRef, disableEditing);
+  useOnClickOutside(formRef as React.RefObject<HTMLElement>, disableEditing);
   useEventListener("keydown", onKeyDown);
 
 

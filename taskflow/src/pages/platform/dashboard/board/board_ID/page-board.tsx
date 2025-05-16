@@ -10,7 +10,8 @@ const BoardIdPage = () => {
     const navigate = useNavigate();
     const { orgId } = useAuth();
     const { boardId } = useParams();
-    const [lists, setLists] = useState();
+
+    const [lists, setLists] = useState<any[]>([]);
 
     const fetchBoard = async () => {
         if (!orgId) {

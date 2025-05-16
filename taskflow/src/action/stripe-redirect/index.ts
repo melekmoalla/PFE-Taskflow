@@ -1,6 +1,6 @@
 
 import { createSafeAction } from "@/lib/create-safe-action";
-import { InputType, ReturnType } from "./types";
+import {  ReturnType } from "./types";
 import { stripeRedirect } from "./schema";
 import { useApiRequest } from "@/action/auth";
 import { useMemo } from "react";
@@ -16,7 +16,7 @@ export const useStripeRedirect = () => {
   const {user} =  useUser();
   // define handler inside a hook
   const handler = useMemo(() => {
-    return async (data: InputType): Promise<ReturnType> => {
+    return async (): Promise<ReturnType> => {
       if (!userId || !orgId || !user) {
         return {
           error: "Unauthorized.",

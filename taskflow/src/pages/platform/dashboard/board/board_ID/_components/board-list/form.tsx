@@ -1,21 +1,25 @@
 
-import React, { ElementRef, useRef, useState } from "react";
+import {  useRef, useState } from "react";
 import { Plus, X } from "lucide-react";
 import ListWrapper from './wrapper';
 import { useEventListener, useOnClickOutside } from "usehooks-ts";
 import { Button } from "@/components/ui/button";
 import FormSubmit from "@/components/form/form-submit";
 import FormInput from "@/components/form/form-input";
-import { useNavigate, useParams } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
 import { toast } from "sonner";
 import { useAction } from "@/hooks/use-action";
 import { useCreateListd } from "@/action/create-list/index";
 import { useOrganization } from "@clerk/clerk-react";
+import { Dispatch, SetStateAction } from 'react';
 
-const ListForm = ({ setData }: { setData: (data: any[]) => void }) => {
+interface ListFormProps {
+  setData: Dispatch<SetStateAction<any[]>>;
+}
+const ListForm = ({ setData }: ListFormProps) => {
 
-    const formRef = useRef<ElementRef<"form">>(null);
-    const inputRef = useRef<ElementRef<"input">>(null);
+    const formRef = useRef<HTMLFormElement | null>(null);
+    const inputRef = useRef<HTMLInputElement | null>(null);
     const { boardId } = useParams();
     const { membership } = useOrganization();
     const role = membership?.role;
@@ -60,12 +64,13 @@ const ListForm = ({ setData }: { setData: (data: any[]) => void }) => {
     const onSubmit = (formData: FormData) => {
         const title = formData.get("title") as string;
 
-        const promise = execute({ title, boardId });
+        execute({ title, boardId: boardId! });
 
     };
 
     useEventListener("keydown", onKeyDown);
-    useOnClickOutside(formRef, disableEditing);
+    useOnClickOutside(formRef as React.RefObject<HTMLElement>, disableEditing);
+
 
     if (isEditing) {
         return (

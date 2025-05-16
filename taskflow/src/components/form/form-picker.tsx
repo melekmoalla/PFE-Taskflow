@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { unsplash } from "@/lib/unsplash";
 import { Check, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -94,7 +94,7 @@ export const FormPicker = ({ id, errors }: IFormPickerProps) => {
                         </div>
 
                         <Link
-                            href={image.links.html}
+                            to={image.links.html}
                             target="_blank"
                             className="opacity-0 group-hover:opacity-100 w-full absolute bottom-0 text-[8px] truncate text-white hover:underline p-1 bg-black/50 z-20"
                         >

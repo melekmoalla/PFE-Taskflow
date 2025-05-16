@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import FormSubmit from "../../../form/form-submit";
 import { toast } from "sonner";
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useQueryClient } from "@tanstack/react-query";
 
 
@@ -25,19 +25,20 @@ import { useCreateAttachement } from "@/action/create-attachement";
 
 interface attachementProps {
     children: React.ReactNode;
-    cardId: string;
+    cardId: number;
     title: string;
 }
 const Attachment = ({ children, cardId, title }: attachementProps) => {
 
-    const closeRef = useRef(null);
-    const fileInputRef = useRef(null);
+    const closeRef = useRef<HTMLButtonElement>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+
     const queryClient = useQueryClient();
-    const [file, setFile] = useState(null);
 
     const CreateAttachment = useCreateAttachement();
     const { execute: executeCreateAttachement, fieldErrors } = useAction(CreateAttachment, {
-        onSuccess: (data) => {
+        onSuccess: () => {
 
             queryClient.invalidateQueries({ queryKey: ["attachment", cardId] });
             queryClient.invalidateQueries({
@@ -60,7 +61,7 @@ const Attachment = ({ children, cardId, title }: attachementProps) => {
     };
 
     const handleButtonClick = () => {
-        fileInputRef.current.click();
+        fileInputRef.current?.click();
     };
 
     const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -7,11 +7,21 @@ import { useAction } from "@/hooks/use-action";
 import { useupdateListOrder } from "@/action/update-list-order";
 import { useUpdateCardOrder } from "@/action/update-card-order";
 import { toast } from "sonner";
+import { Dispatch, SetStateAction } from 'react';
+
+interface List {
+    id: number;
+    board: number;
+    title: string;
+    order: number;
+    created_at: string;
+    updated_at: string;
+    cards: any[];
+}
 
 interface ListContainerProps {
-    data: any[];
-    boardId: string;
-    setData: (data: any[]) => void;
+    data: List[];
+    setData: Dispatch<SetStateAction<List[]>>;
     refetchLists: () => void;
 }
 
@@ -22,7 +32,7 @@ function reorder<T>(list: T[], startIndex: number, endIndex: number) {
     return result;
 }
 
-const ListContainer = ({ data, boardId, setData, refetchLists }: ListContainerProps) => {
+const ListContainer = ({ data, setData, refetchLists }: ListContainerProps) => {
 
     const [orderedData, setOrderedData] = useState(data);
 
@@ -138,6 +148,7 @@ const ListContainer = ({ data, boardId, setData, refetchLists }: ListContainerPr
                 }
             }
         },
+        [orderedData, executeListReOrder, executeCardReOrder]
     );
 
 

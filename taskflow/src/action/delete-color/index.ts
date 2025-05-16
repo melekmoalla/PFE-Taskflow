@@ -25,11 +25,11 @@ export const useDeleteColor = () => {
       const { id, title, id_card } = data;
 
       try {
-        const deleteColor = await apiRequest(`/api/board/card/color/${id}/`, null, "DELETE");
+        await apiRequest(`/api/board/card/color/${id}/`, null, "DELETE");
 
         await createAuditLog({
           action: ACTION.DELETE,
-          entityId: id_card,
+          entityId: id_card.toString(),
           entityTitle: title,
           entityType: ENTITY_TYPE.COLOR,
         });

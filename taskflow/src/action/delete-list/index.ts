@@ -26,7 +26,7 @@ export const useDeleteList = () => {
 
       try {
        
-        const list = await apiRequest(`/api/list/${id}/?boardId=${boardId}`, null, "DELETE");
+        await apiRequest(`/api/list/${id}/?boardId=${boardId}`, null, "DELETE");
 
         await createAuditLog({
           action: ACTION.DELETE,

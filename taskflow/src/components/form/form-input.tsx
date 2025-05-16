@@ -1,7 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
-import  { forwardRef } from "react";
+import { forwardRef } from "react";
 import { useFormStatus } from "react-dom";
 import FormErrors from "./form-errors";
 
@@ -15,8 +15,8 @@ interface IFormInputProps {
   errors?: Record<string, string[] | undefined>;
   className?: string;
   defaultValue?: string;
-  onBlur?: () => void;
-  onChange?: () => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const FormInput = forwardRef<HTMLInputElement, IFormInputProps>(
@@ -33,6 +33,7 @@ const FormInput = forwardRef<HTMLInputElement, IFormInputProps>(
       defaultValue = "",
       onBlur,
       onChange,
+
     },
     ref
   ) => {

@@ -14,23 +14,31 @@ import { useBoard } from "@/hooks/use-board";
 
 //////////////////////////////////////////////
 
+interface Label {
+    id: string;
+    title: string;
+    color: string;
+    isSelected?: boolean;
+}
 
 interface ColorProps {
 
-    label: object;
-    cardId: string;
+    label: Label;
+    cardId: number;
     disableEditing: () => void;
-    setRefreshLabels: () => void;
+    setRefreshLabels: React.Dispatch<React.SetStateAction<boolean>>;
     labels: any;
-    setLabels: () => void;
+    setLabels: React.Dispatch<React.SetStateAction<any>>;
+
 
 }
 
 const Color = ({ label, disableEditing, setRefreshLabels, cardId, labels, setLabels }: ColorProps) => {
 
 
-    const actionRef = useRef(null);
-    const formRef = useRef(null);
+    const actionRef = useRef<boolean | null>(null);
+    const formRef = useRef<HTMLFormElement | null>(null);
+
     const queryClient = useQueryClient();
     const [title, setTitle] = useState(label.title);
 
@@ -100,13 +108,17 @@ const Color = ({ label, disableEditing, setRefreshLabels, cardId, labels, setLab
     const handleLabelToggle = (labelId: string, isSelected: boolean) => {
 
         actionRef.current = isSelected;
-        const updatedLabels = labels.map(label =>
-            label.id === labelId ? { ...label, isSelected } : label
+        const updatedLabels = labels.map((label: Label) =>
+        label.id === labelId ? { ...label, isSelected } : label
         );
+
 
         setLabels(updatedLabels);
 
-        const selectedLabels = updatedLabels.filter(label => label.isSelected).map(label => label.id);
+        const selectedLabels = updatedLabels
+            .filter((label: any) => label.isSelected)
+            .map((label: any) => label.id);
+
 
         if (isSelected)
             setDescription_audit('Added label');
@@ -134,7 +146,7 @@ const Color = ({ label, disableEditing, setRefreshLabels, cardId, labels, setLab
     });
 
 
-    const handleDelete = (id: string, title: string) => {
+    const handleDelete = (id: number, title: string) => {
 
         executeDelete({ id, title, id_card: cardId });
 
@@ -175,7 +187,7 @@ const Color = ({ label, disableEditing, setRefreshLabels, cardId, labels, setLab
             </form>
             <button
                 type="button"
-                onClick={() => handleDelete(label.id, label.title)}
+                onClick={() => handleDelete(Number(label.id), label.title)}
                 title="Delete Label"
             >
                 <Trash className="w-4 h-4" />

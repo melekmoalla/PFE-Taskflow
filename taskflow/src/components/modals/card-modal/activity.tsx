@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 
 interface ICardModalActivityProps {
     items: any[];
-    id_card: number;
+    id_card: string | undefined ;
 }
 
 const CardModalActivity = ({ items, id_card }: ICardModalActivityProps) => {

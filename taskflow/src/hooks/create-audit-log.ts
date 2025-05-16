@@ -3,15 +3,17 @@ import { useApiRequest } from "@/action/auth";
 import { useBoard } from "@/hooks/use-board";
 
 interface Props {
-  entityId: string;
-  entityType: any;
-  entityTitle: string;
-  action: any;
+  entityId?:  string | number;
+  entityType?: any;
+  entityTitle?: string;
+  action?: any;
+  action_description?: string | null;
 }
+
 
 export const useCreateAuditLog = () => {
 
-  const { orgId, userId } = useAuth();
+  const { orgId } = useAuth();
   const {user} = useUser();
   const { apiRequest } = useApiRequest();
   const  { board } = useBoard();
